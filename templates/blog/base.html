@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>老年大学</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <style>
+        /* 基础样式 - 简洁学术风格 */
+        body {
+            font-family: "SimSun", "宋体", serif; /* 正文使用宋体 */
+            padding-top: 0px;
+            color: #333; /* 深灰色文字，提高可读性 */
+            background-color: #ffffff; /* 纯白色背景 */
+            line-height: 1.7; /* 适合阅读的行高 */
+            font-size: 16px; /* 标准正文字号 */
+        }
+
+        /* 标题字体使用黑体 */
+        h1, h2, h3, h4, .navbar-brand, .card-header, .post-title, .footer-title {
+            font-family: "Microsoft YaHei", "黑体", sans-serif;
+            font-weight: 600;
+            color: #003366; /* 深蓝色标题，体现学术感 */
+        }
+
+        /* 导航栏样式 - 学术风格 */
+        .navbar {
+            background-color: #003366 !important; /* 深蓝色导航栏 */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            color: #FFF !important;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar-toggler {
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* 面包屑导航 - 浅色条样式 */
+        .breadcrumb-container {
+            background-color: #f5f7fa;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb {
+            margin-bottom: 0;
+            background-color: transparent;
+            padding-left: 0;
+        }
+
+        .breadcrumb-item + .breadcrumb-item::before {
+            content: ">";
+            color: #666;
+        }
+
+        .breadcrumb-item a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .breadcrumb-item a:hover {
+            color: #0066cc;
+            text-decoration: underline;
+        }
+
+        .breadcrumb-item.active {
+            color: #333;
+        }
+
+        /* 搜索框样式 - 学术风格 */
+        .search-container {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .search-form {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+        }
+
+        .search-input {
+            flex: 1;
+            border-radius: 4px 0 0 4px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-right: none;
+            font-family: "SimSun", "宋体", serif;
+        }
+
+        .search-button {
+            background-color: #0066cc;
+            color: white;
+            border: 1px solid #0066cc;
+            border-radius: 0 4px 4px 0;
+            padding: 0 20px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: "Microsoft YaHei", "黑体", sans-serif;
+        }
+
+        .search-button:hover {
+            background-color: #003366;
+        }
+
+        .search-tags {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .search-tag {
+            display: inline-block;
+            margin: 0 8px 8px;
+            color: #0066cc;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .search-tag:hover {
+            color: #003366;
+            text-decoration: underline;
+        }
+
+        /* 头部横幅 - 学术风格 */
+        .header-banner {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(rgba(0, 51, 102, 0.85), rgba(0, 51, 102, 0.85)), center center no-repeat;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-bottom: 0px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .header-banner h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 0 20px;
+            line-height: 1.5;
+            color: white;
+        }
+
+        /* 主内容区 */
+        .main {
+            margin-bottom: 50px;
+        }
+
+        /* 侧边栏 - 学术风格 */
+        .sidebar {
+            padding-right: 20px;
+        }
+
+        .card {
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+            background-color: white;
+        }
+
+        .card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-header {
+            background-color: #f5f7fa;
+            color: #003366;
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 1.1rem;
+        }
+
+        .card-header i {
+            margin-right: 8px;
+            color: #003366;
+        }
+
+        .nav.flex-column .nav-link {
+            color: #333;
+            padding: 10px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+
+        .nav.flex-column .nav-link i {
+            margin-right: 8px;
+            color: #0066cc;
+        }
+
+        .nav.flex-column .nav-link:hover {
+            color: #0066cc;
+            background-color: #f5f7fa;
+            padding-left: 20px;
+        }
+
+        /* 课程推荐样式 - 学术风格 */
+        .course-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.2s ease;
+        }
+
+        .course-item:hover {
+            background-color: #f5f7fa;
+            padding-left: 20px;
+        }
+
+        .course-title {
+            color: #003366;
+            margin-bottom: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .course-info {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* 内容列表 - 课程展示 - 学术风格 */
+        .post-list {
+            padding-left: 20px;
+        }
+
+        .post {
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            background-color: white;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .post:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .post-title {
+            margin-bottom: 12px;
+            transition: color 0.2s ease;
+            font-size: 1.3rem;
+        }
+
+        .post-title a {
+            color: #003366;
+            text-decoration: none;
+        }
+
+        .post-title a:hover {
+            color: #0066cc;
+            text-decoration: underline;
+        }
+
+        .post-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .post-meta i {
+            color: #666;
+            margin-right: 5px;
+        }
+
+        .post-content {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .post img {
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            max-width: 100%;
+            height: auto;
+        }
+
+        .post-more {
+            display: inline-block;
+            color: #0066cc;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            text-decoration: none;
+        }
+
+        .post-more:hover {
+            color: #003366;
+            text-decoration: underline;
+        }
+
+        /* 分页样式 - 学术风格 */
+        .pagination {
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .page-link {
+            color: #003366;
+            border: 1px solid #ddd;
+            margin: 0 5px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .page-link:hover {
+            background-color: #f5f7fa;
+            color: #0066cc;
+            border-color: #ccc;
+        }
+
+        .page-item.active .page-link {
+            background-color: #003366;
+            border-color: #003366;
+            color: white;
+        }
+
+        /* 页脚样式 - 学术风格 */
+        .footer {
+            background-color: #f8f9fa;
+            color: #666;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer-logo {
+            height: 60px;
+            margin-bottom: 15px;
+        }
+
+        .footer-info {
+            line-height: 1.7;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .footer-title {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e0e0e0;
+            display: inline-block;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: #0066cc;
+        }
+
+        .footer-links i {
+            margin-right: 8px;
+            color: #666;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.9rem;
+        }
+
+
+        /* 导航栏内的搜索框样式 */
+        .navbar .search-container {
+            background-color: transparent;
+            padding: 5px 15px;
+            margin: 0;
+            border: none;
+            box-shadow: none;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .navbar .search-form {
+            margin: 0;
+            max-width: none;
+        }
+
+        .navbar .search-input {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 12px;
+            font-size: 0.9rem;
+        }
+
+        .navbar .search-input:focus {
+            background-color: white;
+            border-color: #0066cc;
+            box-shadow: 0 0 0 0.2rem rgba(0, 102, 204, 0.25);
+        }
+
+        .navbar .search-button {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .sidebar {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+
+            .post-list {
+                padding-left: 0;
+            }
+
+            .header-banner h1 {
+                font-size: 1.8rem;
+            }
+
+            .navbar .search-container {
+                max-width: none;
+                order: 3;
+                width: 100%;
+                padding: 10px 15px;
+            }
+
+            .navbar .search-form {
+                flex-direction: row;
+            }
+
+            .navbar .search-input {
+                margin-bottom: 0;
+                border-radius: 4px 0 0 4px;
+                border-right: none;
+            }
+
+            .navbar .search-button {
+                border-radius: 0 4px 4px 0;
+            }
+        }
+
+        /* 搜索框样式 - 优化支持多模式查询 */
+        .search-container {
+            background-color: #f9f9f9;
+            padding: 25px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .search-form {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            gap: 15px;
+        }
+
+        .search-group {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .search-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .search-input, .search-select {
+            width: 100%;
+            border-radius: 4px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            font-family: "SimSun", "宋体", serif;
+        }
+
+        .search-input:focus, .search-select:focus {
+            border-color: #0066cc;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
+        }
+
+        .search-actions {
+            display: flex;
+            gap: 10px;
+            min-width: 220px;
+        }
+
+        .search-button {
+            background-color: #0066cc;
+            color: white;
+            border: 1px solid #0066cc;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: "Microsoft YaHei", "黑体", sans-serif;
+            flex: 1;
+        }
+
+        .search-button:hover {
+            background-color: #003366;
+        }
+
+        .reset-button {
+            background-color: #f0f0f0;
+            color: #666;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: "Microsoft YaHei", "黑体", sans-serif;
+            flex: 1;
+        }
+
+        .reset-button:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* 标题样式 */
+        .post-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #333;
+            transition: color 0.2s;
+        }
+
+        .post-title:hover {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        /* 摘要样式 */
+        .post-desc {
+            line-height: 1.6;
+        }
+
+        /* 元数据图标与文字间距 */
+        .post-meta i {
+            margin-right: 4px;
+        }
+
+        /* 封面图自适应 */
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header-banner">
+    <h1 class="banner-title">老有所学，老有所乐</h1>
+    <p class="banner-subtitle">欢迎来到老年信息技术大学</p>
+</div>
+
+<div class="container main">
+    <!-- 头部搜索框 -->
+    {% block search %}
+    {% endblock %}
+
+    <div class="row">
+        <!-- 侧边栏 -->
+        <div class="col-xl-2 col-lg-2 sidebar">
+            <!-- 栏目 -->
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fa fa-list-ul"></i> 栏目</h5>
+                </div>
+                <div class="card-body p-0">
+                    <nav class="nav flex-column">
+                        {% for cate in categories %}
+                            <li class="nav-item">
+                                <a href="{% url "post-list" cate.id %}" class="nav-link">
+                                    <i class="fa fa-newspaper-o"></i> {{ cate.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </nav>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 主内容区 -->
+        <div class="col-xl-10 col-lg-10 post-list">
+            {% block main %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // 导航栏滚动效果
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.2)';
+    } else {
+        navbar.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
+    }
+});
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+    
+    // 热门搜索标签点击功能
+    document.querySelectorAll('.search-tag').forEach(tag => {
+        if (tag.textContent !== '热门搜索:') {
+            tag.addEventListener('click', function() {
+                document.querySelector('.search-input').value = this.textContent;
+            });
+        }
+    });
+</script>
+
+{% block extra_js %}
+{% endblock %}
+</body>
+</html>

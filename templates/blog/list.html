@@ -1,0 +1,181 @@
+{% extends "blog/base.html" %}
+
+{#{% block banner %}#}
+{#    <div class="header-banner">#}
+{#        <h1 class="banner-title">老有所学，老有所乐</h1>#}
+{#        <p class="banner-subtitle">欢迎来到老年大学，开启精彩的晚年学习生活</p>#}
+{#    </div>#}
+{#{% endblock %}#}
+
+{% block search %}
+    <div class="search-container">
+        <form class="search-form" method="GET" id="searchForm">
+            <div class="search-group">
+                <label for="search-title" class="search-label">按文章题目查询</label>
+                <input type="search" id="search-title" class="search-input" placeholder="输入文章或课程标题关键词..."
+                       name="keyword" value="{{ keyword }}" aria-label="Search by title">
+            </div>
+
+            <div class="search-group">
+                <label for="search-date" class="search-label">按发表时间查询</label>
+                <input type="date" id="search-date" class="search-input" name="key_date" value="{{ key_date }}">
+            </div>
+
+            <div class="search-group">
+                <label for="search-category" class="search-label">按栏目查询</label>
+                <select id="search-category" class="search-select" name="key_category">
+                    <option value="">全部栏目</option>
+                    {% for cate in categories %}
+                        <option value="{{ cate.id }}"
+                                {% if key_category == cate.id|stringformat:"s" %}selected{% endif %}>
+                            {{ cate.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="search-actions">
+                <button class="search-button" type="submit" onclick="this.form.action='/search/'; this.form.submit();">
+                    <i class="fa fa-search"></i> 搜索
+                </button>
+                <button type="button" class="reset-button" onclick="resetSearchForm(this.form)">
+                    <i class="fa fa-refresh"></i> 重置
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block main %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="row align-items-start mt-3">
+                <!-- 封面图列：有封面时占3列，无封面时隐藏 -->
+                {% if post.cover_image %}
+                    <div class="col-md-3">
+                        <img src="{{ post.cover_image.url }}" 
+                             alt="{{ post.title }}封面"
+                             class="img-fluid rounded" style="width:300px;height: 200px; object-fit: cover;">
+                    </div>
+                {% endif %}
+
+                <!-- 内容列：有封面时占9列，无封面时占12列 -->
+                <div class="col-md-{% if post.cover_image %}9{% else %}12{% endif %}">
+                    <!-- 标题 -->
+                    <h3 class="post-title mb-1">
+                        <a href="{% url 'post-detail' post.id %}">{{ post.title }}</a>
+                    </h3>
+                    <!-- 摘要（多行截断） -->
+                    <div class="post-desc text-muted mb-2" 
+                         style="display: -webkit-box; 
+                                -webkit-box-orient: vertical; 
+                                -webkit-line-clamp: 3; 
+                                overflow: hidden; 
+                                text-overflow: ellipsis;">
+                        {{ post.desc }}
+                    </div>
+                    <!-- 元数据 -->
+                    <div class="d-flex flex-wrap align-items-center text-muted small">
+                        <span class="me-3">
+                            <i class="fa fa-user"></i> {{ post.owner.username }}
+                        </span>
+                        <span class="me-3">
+                            <i class="fa fa-calendar"></i> {{ post.created_time|date:"Y.m.d" }}
+                        </span>
+                        <span class="me-3">
+                            <i class="fa fa-folder"></i> {{ post.category.name }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <!-- 分页 -->
+    <!-- 分页 -->
+    {% if page_obj %}
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=
+                                {{ page_obj.previous_page_number }}{% if keyword %}&keyword={{ keyword }}{% endif %}{% if key_date %}&key_date={{ key_date }}{% endif %}{% if key_category %}&key_category={{ key_category }}{% endif %}"
+                           aria-label="Previous">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-label="Previous">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% for i in page_obj.paginator.page_range %}
+                    {% if page_obj.number == i %}
+                        <li class="page-item active">
+                            <a class="page-link" href="#">{{ i }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=
+                                    
+                                    
+                                    {{ i }}{% if keyword %}&keyword={{ keyword }}{% endif %}{% if key_date %}&key_date={{ key_date }}{% endif %}{% if key_category %}&key_category={{ key_category }}{% endif %}">{{ i }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=
+                                
+                                
+                                {{ page_obj.next_page_number }}{% if keyword %}&keyword={{ keyword }}{% endif %}{% if key_date %}&key_date={{ key_date }}{% endif %}{% if key_category %}&key_category={{ key_category }}{% endif %}"
+                           aria-label="Next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+{% endblock %}
+
+
+{% block extra_js %}
+    <script>
+        function resetForm(form) {
+         form.reset();
+         // 手动清除各个字段的值
+        form.keyword.value = '';
+        form.key_date.value = '';
+        form.key_category.value = '';
+        
+        // 提交表单显示所有结果
+        form.action = '/search/';
+        form.submit();
+        }
+        
+        // 绑定重置按钮事件
+        document.addEventListener('DOMContentLoaded', function() {
+            const resetButton = document.querySelector('.reset-button');
+            const searchForm = document.getElementById('searchForm');
+            
+            if (resetButton && searchForm) {
+                resetButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    resetForm(searchForm);
+                });
+            }
+        });
+    </script>
+{% endblock %}
+

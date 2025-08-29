@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+{% load static %}
+<head>
+    <title>老年大学</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <style>
+        /* 基础样式 - 简洁学术风格 */
+        body {
+            font-family: "SimSun", "宋体", serif; /* 正文使用宋体 */
+            padding-top: 70px;
+            color: #333; /* 深灰色文字，提高可读性 */
+            background-color: #ffffff; /* 纯白色背景 */
+            line-height: 1.7; /* 适合阅读的行高 */
+            font-size: 16px; /* 标准正文字号 */
+        }
+
+        /* 标题字体使用黑体 */
+        h1, h2, h3, h4, .navbar-brand, .card-header, .post-title, .footer-title {
+            font-family: "Microsoft YaHei", "黑体", sans-serif;
+            font-weight: 600;
+            color: #003366; /* 深蓝色标题，体现学术感 */
+        }
+
+        /* 导航栏样式 - 学术风格 */
+        .navbar {
+            background-color: #003366 !important; /* 深蓝色导航栏 */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            color: #FFF !important;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar-toggler {
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* 面包屑导航 - 浅色条样式 */
+        .breadcrumb-container {
+            background-color: #f5f7fa;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 0;
+            background-color: transparent;
+            padding-left: 0;
+        }
+        
+        .breadcrumb-item + .breadcrumb-item::before {
+            content: ">";
+            color: #666;
+        }
+        
+        .breadcrumb-item a {
+            color: #666;
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item a:hover {
+            color: #0066cc;
+            text-decoration: underline;
+        }
+        
+        .breadcrumb-item.active {
+            color: #333;
+        }
+
+        /* 搜索框样式 - 学术风格 */
+        .search-container {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .search-form {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+        }
+
+        .search-input {
+            flex: 1;
+            border-radius: 4px 0 0 4px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-right: none;
+            font-family: "SimSun", "宋体", serif;
+        }
+
+        .search-button {
+            background-color: #0066cc;
+            color: white;
+            border: 1px solid #0066cc;
+            border-radius: 0 4px 4px 0;
+            padding: 0 20px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: "Microsoft YaHei", "黑体", sans-serif;
+        }
+
+        .search-button:hover {
+            background-color: #003366;
+        }
+
+        .search-tags {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .search-tag {
+            display: inline-block;
+            margin: 0 8px 8px;
+            color: #0066cc;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .search-tag:hover {
+            color: #003366;
+            text-decoration: underline;
+        }
+
+        /* 头部横幅 - 学术风格 */
+        .header-banner {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(rgba(0, 51, 102, 0.85), rgba(0, 51, 102, 0.85)), url('https://picsum.photos/id/1060/1200/300') center center no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-banner h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 0 20px;
+            line-height: 1.5;
+            color: white;
+        }
+
+        /* 主内容区 */
+        .main {
+            margin-bottom: 50px;
+        }
+
+        /* 侧边栏 - 学术风格 */
+        .sidebar {
+            padding-right: 20px;
+        }
+
+        .card {
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+            background-color: white;
+        }
+
+        .card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-header {
+            background-color: #f5f7fa;
+            color: #003366;
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 1.1rem;
+        }
+
+        .card-header i {
+            margin-right: 8px;
+            color: #003366;
+        }
+
+        .nav.flex-column .nav-link {
+            color: #333;
+            padding: 10px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+
+        .nav.flex-column .nav-link i {
+            margin-right: 8px;
+            color: #0066cc;
+        }
+
+        .nav.flex-column .nav-link:hover {
+            color: #0066cc;
+            background-color: #f5f7fa;
+            padding-left: 20px;
+        }
+
+        /* 课程推荐样式 - 学术风格 */
+        .course-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.2s ease;
+        }
+
+        .course-item:hover {
+            background-color: #f5f7fa;
+            padding-left: 20px;
+        }
+
+        .course-title {
+            color: #003366;
+            margin-bottom: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .course-info {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* 内容列表 - 课程展示 - 学术风格 */
+        .post-list {
+            padding-left: 20px;
+        }
+
+        .post {
+            background-color: white;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .post:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .post-title {
+            margin-bottom: 12px;
+            transition: color 0.2s ease;
+            font-size: 1.3rem;
+        }
+
+        .post-title a {
+            color: #003366;
+            text-decoration: none;
+        }
+
+        .post-title a:hover {
+            color: #0066cc;
+            text-decoration: underline;
+        }
+
+        .post-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .post-meta i {
+            color: #666;
+            margin-right: 5px;
+        }
+
+        .post-content {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .post img {
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            max-width: 100%;
+            height: auto;
+        }
+
+        .post-more {
+            display: inline-block;
+            color: #0066cc;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            text-decoration: none;
+        }
+
+        .post-more:hover {
+            color: #003366;
+            text-decoration: underline;
+        }
+
+        /* 分页样式 - 学术风格 */
+        .pagination {
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .page-link {
+            color: #003366;
+            border: 1px solid #ddd;
+            margin: 0 5px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .page-link:hover {
+            background-color: #f5f7fa;
+            color: #0066cc;
+            border-color: #ccc;
+        }
+
+        .page-item.active .page-link {
+            background-color: #003366;
+            border-color: #003366;
+            color: white;
+        }
+
+        /* 页脚样式 - 学术风格 */
+        .footer {
+            background-color: #f8f9fa;
+            color: #666;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer-logo {
+            height: 60px;
+            margin-bottom: 15px;
+        }
+
+        .footer-info {
+            line-height: 1.7;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .footer-title {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e0e0e0;
+            display: inline-block;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: #0066cc;
+        }
+
+        .footer-links i {
+            margin-right: 8px;
+            color: #666;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .sidebar {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+
+            .post-list {
+                padding-left: 0;
+            }
+
+            .header-banner h1 {
+                font-size: 1.8rem;
+            }
+
+            .navbar-nav {
+                margin-top: 15px;
+            }
+
+            .search-form {
+                flex-direction: column;
+            }
+
+            .search-input {
+                border-radius: 4px;
+                border-right: 1px solid #ccc;
+                margin-bottom: 10px;
+            }
+
+            .search-button {
+                border-radius: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- 导航栏 -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="https://picsum.photos/id/1080/80/80" alt="老年大学校徽">
+            老年大学
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" href="#">首页</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">课程介绍</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">教学安排</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">关于我们</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">联系我们</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container main">
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb-container">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">首页</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">课程列表</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- 头部横幅 -->
+    <div class="header-banner">
+        <h1>老年大学 - 终身学习,学到老活到老</h1>
+    </div>
+
+    <!-- 主内容区搜索框 -->
+    <div class="search-container">
+        <form class="search-form" action="#" method="get">
+            <input type="search" class="search-input" placeholder="..." aria-label="Search">
+            <button class="search-button" type="submit">
+                <i class="fa fa-search"></i> 搜索
+            </button>
+        </form>
+        <div class="search-tags">
+            <span class="search-tag">热门:</span>
+            <span class="search-tag">书法</span>
+            <span class="search-tag">太极操</span>
+            <span class="search-tag">智能手机</span>
+            <span class="search-tag">绘画</span>
+            <span class="search-tag">广场舞</span>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <!-- 侧边栏 -->
+        <div class="col-xl-4 col-lg-4 sidebar">
+            <!-- 分类目录 -->
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fa fa-list-ul"></i> 分类目录</h5>
+                </div>
+                <div class="card-body p-0">
+                    <nav class="nav flex-column">
+                        {% for cate in categories %}
+                            <li class="nav-item">
+                                <a href="{% url "category-list" cate.id %}" class="nav-link">
+                                    <i class="fa fa-book"></i> {{ cate.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </nav>
+                </div>
+            </div>
+
+            <!-- 热门课程 -->
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fa fa-fire"></i> 热门课程</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="course-item">
+                        <div class="course-title">智能手机实用技巧</div>
+                        <div class="course-info">每周四 14:00-16:00</div>
+                    </div>
+                    <div class="course-item">
+                        <div class="course-title">楷书入门</div>
+                        <div class="course-info">每周一 9:00-11:00</div>
+                    </div>
+                    <div class="course-item">
+                        <div class="course-title">太极养生</div>
+                        <div class="course-info">每周三 8:30-10:00</div>
+                    </div>
+                    <div class="course-item">
+                        <div class="course-title">摄影基础</div>
+                        <div class="course-info">每周五 14:00-16:00</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 主内容区 -->
+        <div class="col-xl-8 col-lg-8 post-list">
+            {% block main %}
+            <!-- 示例课程1 -->
+            <div class="post">
+                <h3 class="post-title"><a href="#">智能手机玩不停，轻松上手课程</a></h3>
+                <div class="post-meta">
+                    <span><i class="fa fa-clock-o"></i> 2023-09-15</span>
+                    <span class="mx-2">|</span>
+                    <span><i class="fa fa-user"></i> 王老师</span>
+                    <span class="mx-2">|</span>
+                    <span><i class="fa fa-folder"></i> 数字技术</span>
+                </div>
+                <div class="post-content">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="https://picsum.photos/id/180/400/300" alt="智能手机课程" class="img-fluid">
+                        </div>
+                        <div class="col-md-8">
+                            <p>从零开始学习智能手机使用，包括微信聊天、拍照、手机支付等实用功能，让您轻松玩转智能生活。课程内容循序渐进，专为老年人设计，耐心细致，确保每位学员都能掌握。</p>
+                            <p>本课程适合零基础学员，无需任何智能手机使用经验，只需携带自己的智能手机即可参与学习。</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="post-more">查看详情 <i class="fa fa-angle-right"></i></a>
+            </div>
+
+            <!-- 示例课程2 -->
+            <div class="post">
+                <h3 class="post-title"><a href="#">书法入门，笔墨飘香</a></h3>
+                <div class="post-meta">
+                    <span><i class="fa fa-clock-o"></i> 2023-09-10</span>
+                    <span class="mx-2">|</span>
+                    <span><i class="fa fa-user"></i> 张老师</span>
+                    <span class="mx-2">|</span>
+                    <span><i class="fa fa-folder"></i> 艺术修养</span>
+                </div>
+                <div class="post-content">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="https://picsum.photos/id/96/400/300" alt="书法课程" class="img-fluid">
+                        </div>
+                        <div class="col-md-8">
+                            <p>从基础笔画开始，学习楷书、行书等书法技巧，培养艺术修养，陶冶情操，丰富晚年生活。课程将提供书法工具，无需自备。</p>
+                            <p>本课程不仅教授书法技巧，更注重通过书法达到修身养性的目的，欢迎各位书法爱好者报名参加。</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="post-more">查看详情 <i class="fa fa-angle-right"></i></a>
+            </div>
+
+            <!-- 分页 -->
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+<!-- 页脚 -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="https://picsum.photos/id/1080/100/100" alt="老年大学校徽" class="footer-logo">
+                <div class="footer-info">
+                    老年大学是一所专门为老年人提供教育服务的公益性学校。秉承"老有所学、老有所乐、老有所为"的办学宗旨，为广大老年人提供优质的学习资源和活动平台。
+                </div>
+            </div>
+            <div class="col-md-2">
+                <h5 class="footer-title">快速链接</h5>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fa fa-home"></i> 学校简介</a></li>
+                    <li><a href="#"><i class="fa fa-book"></i> 课程列表</a></li>
+                    <li><a href="#"><i class="fa fa-pencil"></i> 报名方式</a></li>
+                    <li><a href="#"><i class="fa fa-calendar"></i> 校园活动</a></li>
+                    <li><a href="#"><i class="fa fa-phone"></i> 联系我们</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h5 class="footer-title">联系我们</h5>
+                <ul class="footer-links">
+                    <li><i class="fa fa-map-marker"></i> 北京市海淀区文化中心大厦</li>
+                    <li><i class="fa fa-phone"></i> 010-12345678</li>
+                    <li><i class="fa fa-envelope"></i> contact@laonian.com</li>
+                    <li><i class="fa fa-clock-o"></i> 周一至周五 8:30-17:00</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h5 class="footer-title">关注我们</h5>
+                <div class="row">
+                    <div class="col-6">
+                        <img src="https://picsum.photos/id/1025/120/120" alt="微信公众号二维码" class="img-fluid rounded" style="border:1px solid #e0e0e0;">
+                        <p class="text-center mt-2">微信公众号</p>
+                    </div>
+                    <div class="col-6">
+                        <img src="https://picsum.photos/id/1026/120/120" alt="学员交流群二维码" class="img-fluid rounded" style="border:1px solid #e0e0e0;">
+                        <p class="text-center mt-2">学员群</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2023 老年大学 版权所有
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // 导航栏滚动效果
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('py-2');
+            navbar.classList.remove('py-3');
+        } else {
+            navbar.classList.add('py-3');
+            navbar.classList.remove('py-2');
+        }
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href'))?.scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+    
+    // 热门搜索标签点击功能
+    document.querySelectorAll('.search-tag').forEach(tag => {
+        if (tag.textContent !== '热门:') {
+            tag.addEventListener('click', function() {
+                document.querySelector('.search-input').value = this.textContent;
+            });
+        }
+    });
+</script>
+</body>
+</html>
+    

@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <title>智能手机玩不停，轻松上手课程 - 老年大学</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <style>
+        /* 基础样式 - 改为简洁学术风格 */
+        body {
+            font-family: "SimSun", "宋体", serif; /* 正文使用宋体 */
+            padding-top: 70px;
+            color: #333; /* 深灰色文字，提高可读性 */
+            background-color: #ffffff; /* 纯白色背景 */
+            line-height: 1.7; /* 适合阅读的行高 */
+            font-size: 16px; /* 标准正文字号 */
+        }
+        
+        /* 标题字体使用黑体 */
+        h1, h2, h3, .sidebar-title, .navbar-brand, .section-title, .course-name {
+            font-family: "Microsoft YaHei", "黑体", sans-serif;
+            font-weight: 600;
+            color: #003366; /* 深蓝色标题，体现学术感 */
+        }
+        
+        /* 导航栏样式 - 简洁化 */
+        .navbar {
+            background-color: #003366 !important; /* 深蓝色导航栏 */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            color: #FFF !important;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        /* 主容器布局 */
+        .main-container {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+            padding-top: 20px;
+        }
+        
+        /* 左侧分类目录 - 学术化设计 */
+        .categories-sidebar {
+            width: 240px;
+            flex-shrink: 0;
+            border-right: 1px solid #e0e0e0; /* 细线分隔 */
+            padding-right: 20px;
+        }
+        
+        .sidebar-title {
+            padding: 10px 0;
+            border-bottom: 2px solid #003366;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .categories-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .category-item {
+            padding: 8px 0;
+            border-bottom: 1px dashed #e0e0e0; /* 虚线分隔 */
+            transition: all 0.2s ease;
+        }
+        
+        .category-item:hover {
+            background-color: #f5f5f5;
+            padding-left: 5px;
+        }
+        
+        .category-item.active {
+            background-color: #f0f5ff;
+            padding-left: 5px;
+        }
+        
+        .category-link {
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .category-link i {
+            margin-right: 8px;
+            color: #003366;
+            width: 16px;
+            text-align: center;
+        }
+        
+        .category-item:hover .category-link,
+        .category-item.active .category-link {
+            color: #0066cc;
+        }
+        
+        /* 右侧文章详情区域 */
+        .article-content-container {
+            flex-grow: 1;
+        }
+        
+        /* 引导栏目（面包屑）改为浅色条 */
+        .breadcrumb-container {
+            background-color: #f8f9fa; /* 浅色背景 */
+            border-bottom: 1px solid #e9ecef; /* 底部边框 */
+            padding: 10px 15px;
+            margin-bottom: 20px;
+        }
+        
+        .breadcrumb {
+            margin: 0;
+            background-color: transparent;
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumb-item a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb-item.active {
+            color: #666;
+        }
+        
+        /* 文章详情容器 - 简洁化 */
+        .article-container {
+            background-color: white;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* 文章标题区域 */
+        .article-header {
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #003366;
+        }
+        
+        .article-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .article-meta {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .article-meta span {
+            margin-right: 15px;
+        }
+        
+        .article-meta i {
+            color: #666;
+            margin-right: 5px;
+        }
+        
+        /* 文章内容区域 */
+        .article-content {
+            margin-bottom: 30px;
+        }
+        
+        .article-content p {
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+        
+        .article-image {
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #e0e0e0;
+            padding: 5px;
+        }
+        
+        .content-section {
+            margin-bottom: 25px;
+        }
+        
+        .content-title {
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            padding-left: 10px;
+            border-left: 3px solid #003366;
+        }
+        
+        /* 课程信息卡片 - 简洁风格 */
+        .course-info-card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 30px 0;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .course-info-title {
+            color: #003366;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .course-info-title i {
+            margin-right: 10px;
+        }
+        
+        .course-info-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .course-info-list li {
+            margin-bottom: 10px;
+            padding-left: 5px;
+        }
+        
+        .course-info-list i {
+            color: #003366;
+            margin-right: 10px;
+        }
+        
+        /* 报名按钮 - 简洁化 */
+        .enroll-button {
+            display: inline-block;
+            background-color: #0066cc;
+            color: white;
+            font-size: 1rem;
+            padding: 10px 25px;
+            border-radius: 0;
+            text-decoration: none;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .enroll-button:hover {
+            background-color: #003366;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .enroll-button i {
+            margin-right: 8px;
+        }
+        
+        /* 相关课程推荐 */
+        .related-courses {
+            margin-top: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .course-card {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .course-card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .course-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .course-info {
+            padding: 15px;
+        }
+        
+        .course-name {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        
+        .course-meta {
+            color: #666;
+            font-size: 0.85rem;
+        }
+        
+        .course-meta i {
+            color: #666;
+            margin-right: 5px;
+        }
+        
+        .read-more {
+            display: inline-block;
+            color: #0066cc;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .read-more:hover {
+            color: #003366;
+            text-decoration: underline;
+        }
+        
+        /* 页脚样式 - 简洁化 */
+        .footer {
+            background-color: #f8f9fa;
+            color: #666;
+            padding: 30px 0 20px;
+            margin-top: 50px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .footer-logo {
+            height: 60px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-info {
+            line-height: 1.7;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .footer-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: #003366;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e0e0e0;
+            display: inline-block;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #0066cc;
+        }
+        
+        .footer-links i {
+            margin-right: 8px;
+            color: #666;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 15px;
+            margin-top: 15px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.9rem;
+        }
+        
+        /* 字体大小调整按钮 */
+        .font-control {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: white;
+            padding: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .font-btn {
+            width: 36px;
+            height: 36px;
+            background-color: #f8f9fa;
+            color: #333;
+            border: 1px solid #e0e0e0;
+            margin: 0 3px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .font-btn:hover {
+            background-color: #0066cc;
+            color: white;
+            border-color: #0066cc;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 992px) {
+            .main-container {
+                flex-direction: column;
+            }
+            
+            .categories-sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+                padding-bottom: 20px;
+                margin-bottom: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .article-container {
+                padding: 20px 15px;
+            }
+            
+            .article-title {
+                font-size: 1.5rem;
+            }
+            
+            .article-meta span {
+                display: block;
+                margin: 5px 0;
+            }
+            
+            .content-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="https://picsum.photos/id/1080/80/80" alt="老年大学校徽">
+                老年大学
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">课程介绍</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">教学安排</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">关于我们</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">联系我们</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="main-container">
+            <!-- 左侧分类目录 -->
+            <div class="categories-sidebar">
+                <h3 class="sidebar-title">课程分类</h3>
+                <ul class="categories-list">
+                    <li class="category-item">
+                        <a href="#" class="category-link"><i class="fa fa-home"></i> 全部课程</a>
+                    </li>
+                    <li class="category-item active">
+                        <a href="#" class="category-link"><i class="fa fa-mobile"></i> 数字小能手</a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#" class="category-link"><i class="fa fa-paint-brush"></i> 艺术创作坊</a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#" class="category-link"><i class="fa fa-music"></i> 音乐舞蹈团</a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#" class="category-link"><i class="fa fa-heartbeat"></i> 健康养生堂</a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#" class="category-link"><i class="fa fa-book"></i> 文史故事会</a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#" class="category-link"><i class="fa fa-cutlery"></i> 美食小厨房</a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#" class="category-link"><i class="fa fa-camera"></i> 拍照趣多多</a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#" class="category-link"><i class="fa fa-language"></i> 外语入门班</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- 右侧文章详情区域 -->
+            <div class="article-content-container">
+                <!-- 引导栏目（面包屑导航）- 浅色条样式 -->
+                <div class="breadcrumb-container">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">首页</a></li>
+                            <li class="breadcrumb-item"><a href="#">数字小能手</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">智能手机玩不停，轻松上手课程</li>
+                        </ol>
+                    </nav>
+                </div>
+                
+                <!-- 文章详情 -->
+                <div class="article-container">
+                    <div class="article-header">
+                        <h1 class="article-title">智能手机玩不停，轻松上手课程</h1>
+                        <div class="article-meta">
+                            <span><i class="fa fa-user"></i> 电脑小老师</span>
+                            <span><i class="fa fa-calendar"></i> 2023-09-05</span>
+                            <span><i class="fa fa-eye"></i> 阅读 1258 次</span>
+                        </div>
+                    </div>
+                    
+                    <div class="article-content">
+                        <p>亲爱的叔叔阿姨们，还在为不会用智能手机发愁吗？想不想和孩子们视频聊天、用手机拍照记录生活、甚至网上购物和预约挂号？别担心，我们的"智能手机玩不停"课程就是为您准备的！</p>
+                        
+                        <img src="https://picsum.photos/id/180/800/400" alt="老年人学习使用智能手机" class="article-image">
+                        
+                        <div class="content-section">
+                            <h2 class="content-title">课程适合谁参加？</h2>
+                            <p>不管您是完全不会用智能手机的新手，还是会一些基础操作想进一步学习的朋友，都欢迎来参加！我们的课程从零开始，手把手教学，保证让您学得会、用得好。</p>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="content-title">我们会学到什么？</h2>
+                            <p>课程内容非常实用，都是咱们老年人日常生活中最常用的功能：</p>
+                            <ul>
+                                <li><strong>微信使用</strong>：发消息、语音聊天、视频通话，还能和家人建群聊天</li>
+                                <li><strong>拍照技巧</strong>：拍出清晰好看的照片，简单编辑美化，制作电子相册</li>
+                                <li><strong>手机支付</strong>：微信、支付宝付款，安全使用小技巧</li>
+                                <li><strong>生活便利</strong>：健康码、行程码申领，网上挂号，交水电费</li>
+                                <li><strong>防骗指南</strong>：识别诈骗信息，保护个人信息和财产安全</li>
+                                <li><strong>娱乐休闲</strong>：看新闻、听戏曲、玩小游戏，丰富晚年生活</li>
+                            </ul>
+                        </div>
+                        
+                        <img src="https://picsum.photos/id/3/800/400" alt="老师指导使用智能手机" class="article-image">
+                        
+                        <div class="content-section">
+                            <h2 class="content-title">为什么选择我们的课程？</h2>
+                            <p>我们了解老年人学习新事物的特点，所以课程有这些优势：</p>
+                            <ul>
+                                <li>老师有耐心，说话清楚，操作步骤讲得细</li>
+                                <li>教材图文并茂，字体大，看得清</li>
+                                <li>人手一机，边学边练，当场解决问题</li>
+                                <li>同学之间互相帮助，学习氛围轻松愉快</li>
+                                <li>学完有资料可以带回家，忘记了可以随时看</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="course-info-card">
+                            <h3 class="course-info-title"><i class="fa fa-calendar-check-o"></i> 课程详细信息</h3>
+                            <ul class="course-info-list">
+                                <li><i class="fa fa-clock-o"></i> <strong>上课时间</strong>：每周四下午 14:00-16:00（共8节课）</li>
+                                <li><i class="fa fa-map-marker"></i> <strong>上课地点</strong>：学校一号教学楼 102教室</li>
+                                <li><i class="fa fa-user"></i> <strong>授课老师</strong>：王老师（有10年老年教学经验）</li>
+                                <li><i class="fa fa-money"></i> <strong>课程费用</strong>：160元（含教材和练习材料）</li>
+                                <li><i class="fa fa-users"></i> <strong>招生人数</strong>：20人（名额有限，报满即止）</li>
+                                <li><i class="fa fa-graduation-cap"></i> <strong>适合机型</strong>：智能手机（安卓或苹果均可）</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h2 class="content-title">学员分享</h2>
+                            <p>张阿姨（68岁）："以前看孙子用微信视频，我也想跟远方的女儿视频聊天，可是自己不会弄。学了这个课程后，现在每天都能和女儿视频，还会发照片给她看，太方便了！"</p>
+                            <p>李叔叔（72岁）："王老师教得很耐心，一步步教我们操作。现在我不仅会用手机付款，还会在网上挂号，不用早早去医院排队了，真的很实用！"</p>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <a href="#" class="enroll-button"><i class="fa fa-pencil-square-o"></i> 我要报名参加</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 相关课程推荐 -->
+                <section class="related-courses">
+                    <h2 class="section-title">你可能也感兴趣的课程</h2>
+                    
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                        <!-- 相关课程1 -->
+                        <div class="col">
+                            <div class="course-card h-100">
+                                <img src="https://picsum.photos/id/20/400/300" alt="电脑基础课程" class="course-image">
+                                <div class="course-info">
+                                    <h3 class="course-name">电脑入门一点通</h3>
+                                    <div class="course-meta">
+                                        <span><i class="fa fa-calendar"></i> 每周三上午</span>
+                                        <span class="mx-2">|</span>
+                                        <span><i class="fa fa-user"></i> 刘老师</span>
+                                    </div>
+                                    <a href="#" class="read-more">查看详情 <i class="fa fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 相关课程2 -->
+                        <div class="col">
+                            <div class="course-card h-100">
+                                <img src="https://picsum.photos/id/1059/400/300" alt="照片编辑课程" class="course-image">
+                                <div class="course-info">
+                                    <h3 class="course-name">手机照片变美图</h3>
+                                    <div class="course-meta">
+                                        <span><i class="fa fa-calendar"></i> 每周五下午</span>
+                                        <span class="mx-2">|</span>
+                                        <span><i class="fa fa-user"></i> 陈老师</span>
+                                    </div>
+                                    <a href="#" class="read-more">查看详情 <i class="fa fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 相关课程3 -->
+                        <div class="col">
+                            <div class="course-card h-100">
+                                <img src="https://picsum.photos/id/160/400/300" alt="网上购物课程" class="course-image">
+                                <div class="course-info">
+                                    <h3 class="course-name">网上购物轻松学</h3>
+                                    <div class="course-meta">
+                                        <span><i class="fa fa-calendar"></i> 每周二下午</span>
+                                        <span class="mx-2">|</span>
+                                        <span><i class="fa fa-user"></i> 赵老师</span>
+                                    </div>
+                                    <a href="#" class="read-more">查看详情 <i class="fa fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 字体大小调整按钮 -->
+    <div class="font-control">
+        <button class="font-btn" id="decreaseFont"><i class="fa fa-minus"></i></button>
+        <button class="font-btn" id="defaultFont">A</button>
+        <button class="font-btn" id="increaseFont"><i class="fa fa-plus"></i></button>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="https://picsum.photos/id/1080/100/100" alt="老年大学校徽" class="footer-logo">
+                    <div class="footer-info">
+                        老年大学是叔叔阿姨们的快乐家园！在这里可以学新知识、交好朋友、玩得开心、活得精彩，真正实现"老有所学、老有所乐"！
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h5 class="footer-title">快速链接</h5>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fa fa-home"></i> 学校简介</a></li>
+                        <li><a href="#"><i class="fa fa-book"></i> 课程列表</a></li>
+                        <li><a href="#"><i class="fa fa-pencil"></i> 报名方式</a></li>
+                        <li><a href="#"><i class="fa fa-gamepad"></i> 校园活动</a></li>
+                        <li><a href="#"><i class="fa fa-phone"></i> 联系我们</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="footer-title">联系我们</h5>
+                    <ul class="footer-links">
+                        <li><i class="fa fa-map-marker"></i> 北京市海淀区文化中心大厦</li>
+                        <li><i class="fa fa-phone"></i> 010-12345678</li>
+                        <li><i class="fa fa-envelope"></i> happy@laonian.com</li>
+                        <li><i class="fa fa-clock-o"></i> 上课时间: 周一至周五 8:30-17:00</li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="footer-title">关注我们</h5>
+                    <div class="row">
+                        <div class="col-6">
+                            <img src="https://picsum.photos/id/1025/120/120" alt="微信公众号二维码" class="img-fluid rounded" style="border:1px solid #e0e0e0;">
+                            <p class="text-center mt-2">微信公众号</p>
+                        </div>
+                        <div class="col-6">
+                            <img src="https://picsum.photos/id/1026/120/120" alt="学员交流群二维码" class="img-fluid rounded" style="border:1px solid #e0e0e0;">
+                            <p class="text-center mt-2">学员群</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2023 老年大学 版权所有 | 让每一天都充满快乐！
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-3');
+            } else {
+                navbar.classList.add('py-3');
+                navbar.classList.remove('py-2');
+            }
+        });
+        
+        // 字体大小调整功能
+        const decreaseBtn = document.getElementById('decreaseFont');
+        const defaultBtn = document.getElementById('defaultFont');
+        const increaseBtn = document.getElementById('increaseFont');
+        const articleContent = document.querySelector('.article-content');
+        
+        let currentFontSize = 16; // 默认字体大小（px）
+        const fontSizeStep = 2; // 调整步长
+        
+        decreaseBtn.addEventListener('click', function() {
+            if (currentFontSize > 14) { // 最小字体限制
+                currentFontSize -= fontSizeStep;
+                articleContent.style.fontSize = `${currentFontSize}px`;
+            }
+        });
+        
+        defaultBtn.addEventListener('click', function() {
+            currentFontSize = 16; // 恢复默认字体大小
+            articleContent.style.fontSize = `${currentFontSize}px`;
+        });
+        
+        increaseBtn.addEventListener('click', function() {
+            if (currentFontSize < 24) { // 最大字体限制
+                currentFontSize += fontSizeStep;
+                articleContent.style.fontSize = `${currentFontSize}px`;
+            }
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href'))?.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // 分类项点击效果
+        document.querySelectorAll('.category-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // 移除所有激活状态
+                document.querySelectorAll('.category-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+                
+                // 添加当前激活状态
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
+    

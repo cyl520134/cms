@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>北京交通大学</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.css">
+    <style>
+        .post {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container head">
+    <nav class="navbar  fixed-top navbar-expand-1g navbar-light bg-light">
+        <a class="navbar-brand" href="#">首页</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">搜索</button>
+            </form>
+        </div>
+    </nav>
+</div>
+
+<div class="container main">
+    <div class="row">
+        <div class="col-xl-4 sidebar">
+            <!-- 这里可以放置侧边栏内容 -->
+            <div class="card">
+                <div class="card-header">
+                    <h5>分类目录</h5>
+                </div>
+                <div class="card-body">
+                    <nav class="nav flex-column">
+                        {% for cate in categories %}
+                            <a href="{% url "category-list" cate.id %}" class="nav-link">{{ cate.name }}</a>
+                        {% endfor %}
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8 post-list">
+            {% block main %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

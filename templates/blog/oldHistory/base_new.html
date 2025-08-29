@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+{% load static %}
+<head>
+    <title>老年大学</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <style>
+        /* 基础样式 - 卡通风格 */
+        body {
+            font-family: "Comic Sans MS", "Marker Felt", sans-serif;
+            padding-top: 70px;
+            color: #5D4037;
+            background-color: #FFF9C4;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23FFB74D' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        /* 导航栏样式 - 卡通风格 */
+        .navbar {
+            background-color: #FF6B6B !important;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            color: #FFF !important;
+            font-weight: bold;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-brand img {
+            height: 50px;
+            margin-right: 12px;
+            border-radius: 50%;
+            background-color: white;
+            padding: 5px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-toggler {
+            border: 3px solid white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 搜索框样式 - 卡通风格 */
+        .search-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            border: 3px dashed #FFD166;
+        }
+
+        .search-form {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+        }
+
+        .search-input {
+            flex: 1;
+            border-radius: 30px 0 0 30px;
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            border: 3px solid #4ECDC4;
+            border-right: none;
+            font-family: "Comic Sans MS", sans-serif;
+        }
+
+        .search-button {
+            background-color: #4ECDC4;
+            color: white;
+            border: 3px solid #4ECDC4;
+            border-radius: 0 30px 30px 0;
+            padding: 0 30px;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            font-family: "Comic Sans MS", sans-serif;
+        }
+
+        .search-button:hover {
+            background-color: #3DBCB4;
+            transform: scale(1.05);
+        }
+
+        .search-tags {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .search-tag {
+            display: inline-block;
+            margin: 0 8px 8px;
+            color: #29A19C;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: bold;
+        }
+
+        .search-tag:hover {
+            color: #1A7D78;
+            text-decoration: underline;
+            transform: scale(1.1);
+        }
+
+        /* 头部横幅 - 卡通风格 */
+        .header-banner {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(rgba(255, 107, 107, 0.85), rgba(255, 107, 107, 0.85)), url('https://picsum.photos/id/1060/1200/300') center center no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-bottom: 30px;
+            border-radius: 20px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            border: 5px solid white;
+        }
+
+        .header-banner h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            padding: 0 20px;
+            line-height: 1.5;
+        }
+
+        /* 主内容区 */
+        .main {
+            margin-bottom: 50px;
+        }
+
+        /* 侧边栏 - 卡通风格 */
+        .sidebar {
+            padding-right: 20px;
+        }
+
+        .card {
+            border: 4px solid #FFD166;
+            border-radius: 20px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: white;
+        }
+
+        .card:hover {
+            transform: translateY(-5px) rotate(1deg);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            background-color: #FF6B6B;
+            color: white;
+            font-weight: bold;
+            padding: 15px 20px;
+            border-bottom: 3px solid #FFD166;
+            font-size: 1.2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header i {
+            margin-right: 10px;
+            font-size: 1.4rem;
+        }
+
+        .nav.flex-column .nav-link {
+            color: #5D4037;
+            padding: 12px 20px;
+            border-bottom: 2px dashed #FFE082;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+        }
+
+        .nav.flex-column .nav-link i {
+            margin-right: 10px;
+            color: #FF6B6B;
+            font-size: 1.2rem;
+        }
+
+        .nav.flex-column .nav-link:hover {
+            color: #FF6B6B;
+            background-color: #FFF9C4;
+            padding-left: 25px;
+            transform: translateX(5px);
+        }
+
+        /* 课程推荐样式 - 卡通风格 */
+        .course-item {
+            padding: 15px 20px;
+            border-bottom: 2px dashed #FFE082;
+            transition: all 0.2s ease;
+        }
+
+        .course-item:hover {
+            background-color: #FFF9C4;
+            padding-left: 25px;
+            transform: translateX(5px);
+        }
+
+        .course-title {
+            font-weight: bold;
+            color: #FF6B6B;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .course-info {
+            font-size: 0.9rem;
+            color: #795548;
+            font-style: italic;
+        }
+
+        /* 内容列表 - 课程展示 - 卡通风格 */
+        .post-list {
+            padding-left: 20px;
+        }
+
+        .post {
+            background-color: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 3px solid #4ECDC4;
+        }
+
+        .post:hover {
+            transform: translateY(-5px) rotate(-1deg);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .post-title {
+            color: #FF6B6B;
+            font-weight: bold;
+            margin-bottom: 15px;
+            transition: color 0.2s ease;
+            font-size: 1.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-title:hover {
+            color: #E55A5A;
+            text-decoration: none;
+        }
+
+        .post-meta {
+            color: #795548;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed #E0F7FA;
+        }
+
+        .post-meta i {
+            color: #4ECDC4;
+            margin-right: 5px;
+        }
+
+        .post-content {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .post img {
+            border-radius: 15px;
+            border: 3px solid #FFD166;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .post-more {
+            display: inline-block;
+            color: #4ECDC4;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            background-color: #E0F7FA;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        .post-more:hover {
+            color: #3DBCB4;
+            transform: translateX(5px);
+            text-decoration: none;
+            background-color: #B2EBF2;
+        }
+
+        /* 分页样式 - 卡通风格 */
+        .pagination {
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .page-link {
+            color: #FF6B6B;
+            border: 3px solid #FFD166;
+            margin: 0 8px;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            font-weight: bold;
+            background-color: white;
+        }
+
+        .page-link:hover {
+            background-color: #FF6B6B;
+            color: white;
+            border-color: #FF6B6B;
+            transform: scale(1.15);
+        }
+
+        .page-item.active .page-link {
+            background-color: #FF6B6B;
+            border-color: #FF6B6B;
+            color: white;
+        }
+
+        /* 页脚样式 - 卡通风格 */
+        .footer {
+            background-color: #FF6B6B;
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+            border-top: 8px dashed #FFD166;
+        }
+
+        .footer-logo {
+            height: 80px;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            background-color: white;
+            padding: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer-info {
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .footer-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            padding-bottom: 5px;
+            border-bottom: 3px solid #FFD166;
+            display: inline-block;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+
+        .footer-links a {
+            color: #FFF9C4;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            text-decoration: none;
+            padding-left: 5px;
+            font-weight: bold;
+        }
+
+        .footer-links i {
+            margin-right: 8px;
+            color: #FFD166;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 2px dashed rgba(255, 209, 102, 0.5);
+            font-size: 1rem;
+            color: #FFF9C4;
+        }
+
+        /* 卡通图标样式增强 */
+        .fa {
+            transform: scale(1.1);
+            transition: all 0.2s ease;
+        }
+
+        .fa:hover {
+            transform: scale(1.3) rotate(10deg);
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .sidebar {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+
+            .post-list {
+                padding-left: 0;
+            }
+
+            .header-banner h1 {
+                font-size: 1.8rem;
+            }
+
+            .navbar-nav {
+                margin-top: 15px;
+            }
+
+            .search-form {
+                flex-direction: column;
+            }
+
+            .search-input {
+                border-radius: 30px;
+                border-right: 3px solid #4ECDC4;
+                margin-bottom: 15px;
+            }
+
+            .search-button {
+                border-radius: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- 导航栏 -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="https://picsum.photos/id/1080/80/80" alt="老年大学校徽">
+            老年大学
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+
+<div class="container main">
+    <!-- 头部横幅 -->
+    <div class="header-banner">
+        <h1>老年大学 - 终身学习,学到老活到老</h1>
+    </div>
+
+    <!-- 主内容区搜索框 - 卡通风格 -->
+    <div class="search-container">
+        <form class="search-form" action="#" method="get">
+            <input type="search" class="search-input" placeholder="找课程、找活动、找朋友..." aria-label="Search">
+            <button class="search-button" type="submit">
+                <i class="fa fa-search"></i> 搜索
+            </button>
+        </form>
+{#        <div class="search-tags">#}
+{#            <span class="search-tag">热门:</span>#}
+{#            <span class="search-tag">书法涂鸦</span>#}
+{#            <span class="search-tag">太极操</span>#}
+{#            <span class="search-tag">手机玩不停</span>#}
+{#            <span class="search-tag">画画乐</span>#}
+{#            <span class="search-tag">广场舞</span>#}
+{#        </div>#}
+    </div>
+
+
+    <div class="row">
+        <!-- 侧边栏 -->
+        <div class="col-xl-4 col-lg-4 sidebar">
+            <!-- 分类目录 -->
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fa fa-list-ul"></i> 分类目录</h5>
+                </div>
+                <div class="card-body p-0">
+                    <nav class="nav flex-column">
+                        {% for cate in categories %}
+                            <li class="nav-item">
+                                <a href="{% url "category-list" cate.id %}" class="nav-link">
+                                    <i class="fa fa-newspaper-o"></i> {{ cate.name }}</a>
+                            </li>
+                        {% endfor %}
+                        {#                        <a href="#" class="nav-link"><i class="fa fa-newspaper-o"></i> 学校新闻</a>#}
+                        {#                        <a href="#" class="nav-link"><i class="fa fa-graduation-cap"></i> 教育教学</a>#}
+                        {#                        <a href="#" class="nav-link"><i class="fa fa-flask"></i> 科学研究</a>#}
+                        {#                        <a href="#" class="nav-link"><i class="fa fa-users"></i> 师资队伍</a>#}
+                        {#                        <a href="#" class="nav-link"><i class="fa fa-calendar"></i> 学术活动</a>#}
+                        {#                        <a href="#" class="nav-link"><i class="fa fa-university"></i> 招生信息</a>#}
+                        {#                        <a href="#" class="nav-link"><i class="fa fa-life-ring"></i> 学生服务</a>#}
+                        {#                        <a href="#" class="nav-link"><i class="fa fa-globe"></i> 国际交流</a>#}
+                    </nav>
+                </div>
+            </div>
+
+            <!-- 最新公告 -->
+{#            <div class="card">#}
+{#                <div class="card-header">#}
+{#                    <h5><i class="fa fa-bullhorn"></i> 最新公告</h5>#}
+{#                </div>#}
+{#                <div class="card-body p-0">#}
+{#                    <div class="announcement-item">#}
+{#                        <a href="#" class="text-dark">关于2023-2024学年第二学期期末考试安排的通知</a>#}
+{#                        <div class="announcement-date">2023-06-15</div>#}
+{#                    </div>#}
+{#                    <div class="announcement-item">#}
+{#                        <a href="#" class="text-dark">北京交通大学2024年招生章程发布</a>#}
+{#                        <div class="announcement-date">2023-06-10</div>#}
+{#                    </div>#}
+{#                    <div class="announcement-item">#}
+{#                        <a href="#" class="text-dark">关于开展暑期社会实践活动的通知</a>#}
+{#                        <div class="announcement-date">2023-06-05</div>#}
+{#                    </div>#}
+{#                    <div class="announcement-item">#}
+{#                        <a href="#" class="text-dark">2023年端午节放假通知</a>#}
+{#                        <div class="announcement-date">2023-06-01</div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+
+        </div>
+
+        <!-- 主内容区 -->
+        <div class="col-xl-8 col-lg-8 post-list">
+            {% block main %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // 导航栏滚动效果
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('py-2');
+            navbar.classList.remove('py-3');
+        } else {
+            navbar.classList.add('py-3');
+            navbar.classList.remove('py-2');
+        }
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+    
+    // 热门搜索标签点击功能
+    document.querySelectorAll('.search-tag').forEach(tag => {
+        if (tag.textContent !== '热门搜索:') {
+            tag.addEventListener('click', function() {
+                document.querySelector('.search-input').value = this.textContent;
+            });
+        }
+    });
+</script>
+</body>
+</html>

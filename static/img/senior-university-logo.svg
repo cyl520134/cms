@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- 背景圆形 -->
+  <circle cx="100" cy="100" r="90" fill="#003366" />
+  
+  <!-- 书本形状 -->
+  <path d="M60,120 L140,120 L130,70 L70,70 Z" fill="#FFFFFF" />
+  <path d="M100,70 L100,120" stroke="#003366" stroke-width="2" />
+  
+  <!-- 装饰线条 -->
+  <path d="M75,80 L125,80" stroke="#003366" stroke-width="1.5" />
+  <path d="M75,90 L125,90" stroke="#003366" stroke-width="1.5" />
+  <path d="M75,100 L125,100" stroke="#003366" stroke-width="1.5" />
+  <path d="M75,110 L125,110" stroke="#003366" stroke-width="1.5" />
+  
+  <!-- 树叶元素 - 象征生命力 -->
+  <path d="M120,65 Q140,45 130,65 Q125,50 110,60 Q100,40 120,65" fill="#3AA655" />
+  <path d="M80,65 Q60,45 70,65 Q75,50 90,60 Q100,40 80,65" fill="#3AA655" />
+  
+  <!-- 点缀元素 -->
+  <circle cx="100" cy="50" r="3" fill="#FFFFFF" />
+  <circle cx="115" cy="55" r="2" fill="#FFFFFF" />
+  <circle cx="85" cy="55" r="2" fill="#FFFFFF" />
+</svg>
+    
